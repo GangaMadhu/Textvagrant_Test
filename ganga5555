@@ -1,0 +1,24 @@
+// Basket data structure
+const basket = [
+  { productName: 'Leather Wallet', unitPrice: 1100, GSTPercentage: 18, quantity: 1 },
+  { productName: 'Umbrella', unitPrice: 900, GSTPercentage: 12, quantity: 2 },
+  { productName: 'Cigarette', unitPrice: 200, GSTPercentage: 28, quantity: 3 },
+  { productName: 'Honey', unitPrice: 3, GSTPercentage: 2, quantity: 100 }
+];
+
+// Problem 1: Identify the product with the maximum GST amount
+const productWithMaxGST = basket.reduce((maxGSTProduct, currentProduct) => {
+  const currentGSTAmount = (currentProduct.unitPrice * currentProduct.GSTPercentage) / 100;
+  const maxGSTAmount = (maxGSTProduct.unitPrice * maxGSTProduct.GSTPercentage) / 100;
+  return currentGSTAmount > maxGSTAmount ? currentProduct : maxGSTProduct;
+}, basket[0]);
+
+console.log('Product with maximum GST amount:', productWithMaxGST.productName);
+
+// Problem 2: Calculate the total amount to be paid to the shopkeeper
+const totalAmountToPay = basket.reduce((total, product) => {
+  const productAmount = product.unitPrice + (product.unitPrice * product.GSTPercentage) / 100;
+  return total + productAmount * product.quantity;
+}, 0);
+
+console.log('Total amount to be paid to the shopkeeper:', totalAmountToPay);
